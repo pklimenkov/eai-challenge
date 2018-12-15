@@ -1,1 +1,6 @@
-<h3>AAAAA</h3>
+<% @questions.each do |question| %>
+  <div class="question">
+    <h3><%= question.title %></h3>
+    <%= link_to(I18n.t('questions.view'), question_path(question)) %>
+  </div>
+<% end %>
