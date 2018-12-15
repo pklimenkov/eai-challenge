@@ -1,0 +1,11 @@
+<div class="top">
+  <%= link_to(I18n.t('questions.new'), new_question_path) %>
+</div>
+
+<% @questions.each do |question| %>
+  <div class="question">
+    <h3><%= question.title %></h3>
+    <%= link_to(I18n.t('questions.view'), question_path(question)) %>
+  </div>
+<% end %>
+

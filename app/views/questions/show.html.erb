@@ -1,0 +1,17 @@
+<% if current_user.id == @question.user_id %>
+  <%= link_to(I18n.t('questions.edit'), edit_question_path(@question)) %>
+<% end %>
+
+<div class="question">
+  <div class="details">
+    <h1><%= @question.title %></h1>
+    <p><%= @question.title %></p>
+  </div>
+  <div class="answers">
+    <div class="list">
+      <% @question.answers.each do |answer| %>
+        <%= render 'answer', answer: answer %>
+      <% end %>
+    </div>
+  </div>
+</div>
