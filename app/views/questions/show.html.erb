@@ -1,6 +1,11 @@
 <% if current_user.id == @question.user_id %>
   <%= link_to(I18n.t('questions.edit'), edit_question_path(@question)) %>
 <% end %>
+<% if current_user.user_questions.where(question: @question).exists? %>
+    <%= link_to(I18n.t('questions.unfollow'), unfollow_question_path(@question)) %>
+<% else %>
+    <%= link_to(I18n.t('questions.follow'), follow_question_path(@question)) %>
+<% end %>
 
 <div class="question">
   <div class="details">
@@ -9,9 +14,15 @@
   </div>
   <div class="answers">
     <div class="list">
-      <% @question.answers.each do |answer| %>
-        <%= render 'answer', answer: answer %>
-      <% end %>
+      <dl>
+        <% @question.answers.preload(:votes).each do |answer| %>
+          <%= render 'answers/show', answer: answer %>
+        <% end %>
+      </dl>
     </div>
   </div>
 </div>
+
+<% unless current_user.id == @question.user_id %>
+  <%= render 'answers/new' %>
+<% end %>
