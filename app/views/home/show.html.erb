@@ -1,6 +1,11 @@
-<% @questions.each do |question| %>
-  <div class="question">
-    <h3><%= question.title %></h3>
-    <%= link_to(I18n.t('questions.view'), question_path(question)) %>
-  </div>
-<% end %>
+<div class="list">
+  <dl>
+    <% @questions.each do |question| %>
+        <div class="list-item">
+          <li class="left tal">
+            <%= link_to(question.title, question_path(question)) %>
+          </li>
+        </div>
+    <% end %>
+  </dl>
+</div>
